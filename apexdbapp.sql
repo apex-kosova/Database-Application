@@ -27,7 +27,7 @@ prompt APPLICATION 10199 - SIM
 -- Application Export:
 --   Application:     10199
 --   Name:            SIM
---   Date and Time:   01:18 Wednesday February 18, 2015
+--   Date and Time:   04:23 Wednesday February 18, 2015
 --   Exported By:     FZOHRA92@UTEXAS.EDU
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -107,7 +107,7 @@ wwv_flow_api.create_flow(
 ,p_rejoin_existing_sessions=>'N'
 ,p_csv_encoding=>'Y'
 ,p_last_updated_by=>'FZOHRA92@UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150218011737'
+,p_last_upd_yyyymmddhh24miss=>'20150218042010'
 ,p_ui_type_name => null
 );
 end;
@@ -7527,7 +7527,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'FZOHRA92@UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150218011737'
+,p_last_upd_yyyymmddhh24miss=>'20150218040301'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(589091321173665756)
@@ -7552,29 +7552,33 @@ wwv_flow_api.create_page_plug(
 ,p_include_in_reg_disp_sel_yn=>'N'
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select PERSON_ID,',
-'       TYPE,',
-'       NAME,',
-'       SSNUM,',
-'       GENDER,',
-'       BIRTH_DATE,',
-'       ADDRESS,',
-'       CITY,',
-'       STATE,',
-'       ZIP,',
-'       HIRE_DATE,',
-'       SALARY,',
-'       STATUS,',
-'       TITLE,',
-'       RATING,',
-'       BONUS,',
-'       SIM_DEPT_DEPT_ID1,',
-'       SIM_DEPT_DEPT_ID,',
-'       CREATED,',
-'       CREATED_BY,',
-'       UPDATED,',
-'       UPDATED_BY',
-'  from SIM_PERSON'))
+'select p.PERSON_ID,',
+'       p.TYPE,',
+'       p.NAME,',
+'       p.SSNUM,',
+'       p.GENDER,',
+'       p.BIRTH_DATE,',
+'       p.ADDRESS,',
+'       p.CITY,',
+'       p.STATE,',
+'       p.ZIP,',
+'       p.HIRE_DATE,',
+'       p.SALARY,',
+'       p.STATUS,',
+'       p.TITLE,',
+'       p.RATING,',
+'       p.BONUS,',
+'       p.SIM_DEPT_DEPT_ID1,',
+'       p.SIM_DEPT_DEPT_ID,',
+'       d.name as department_managed,',
+'       d2.name as department,',
+'       p.CREATED,',
+'       p.CREATED_BY,',
+'       p.UPDATED,',
+'       p.UPDATED_BY',
+'  from SIM_PERSON p ',
+'left outer join SIM_DEPT d on p.SIM_DEPT_DEPT_ID1 = d.dept_id',
+'left outer join SIM_DEPT d2 on p.SIM_DEPT_DEPT_ID = d2.dept_id'))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_plug_query_row_template=>1
 ,p_plug_query_show_nulls_as=>' - '
@@ -7804,6 +7808,24 @@ wwv_flow_api.create_worksheet_column(
 ,p_column_type=>'STRING'
 ,p_tz_dependent=>'N'
 );
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(612734195274234354)
+,p_db_column_name=>'DEPARTMENT_MANAGED'
+,p_display_order=>23
+,p_column_identifier=>'W'
+,p_column_label=>'Department Managed'
+,p_column_type=>'STRING'
+,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(612734537078234354)
+,p_db_column_name=>'DEPARTMENT'
+,p_display_order=>24
+,p_column_identifier=>'X'
+,p_column_label=>'Department'
+,p_column_type=>'STRING'
+,p_tz_dependent=>'N'
+);
 wwv_flow_api.create_worksheet_rpt(
  p_id=>wwv_flow_api.id(602757301125239908)
 ,p_application_user=>'APXWS_DEFAULT'
@@ -7812,7 +7834,7 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>50
-,p_report_columns=>'PERSON_ID:TYPE:NAME:SSNUM:GENDER:BIRTH_DATE:ADDRESS:CITY:STATE:ZIP:HIRE_DATE:SALARY:STATUS:TITLE:RATING:BONUS:SIM_DEPT_DEPT_ID1:SIM_DEPT_DEPT_ID:CREATED:CREATED_BY:UPDATED:UPDATED_BY'
+,p_report_columns=>'PERSON_ID:TYPE:NAME:SSNUM:GENDER:BIRTH_DATE:ADDRESS:CITY:STATE:ZIP:HIRE_DATE:SALARY:STATUS:TITLE:RATING:BONUS:SIM_DEPT_DEPT_ID1:SIM_DEPT_DEPT_ID:CREATED:CREATED_BY:UPDATED:DEPARTMENT'
 ,p_flashback_enabled=>'N'
 );
 end;
@@ -7834,7 +7856,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'FZOHRA92@UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150217233136'
+,p_last_upd_yyyymmddhh24miss=>'20150218040644'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(589397874375740625)
@@ -7864,7 +7886,7 @@ wwv_flow_api.create_page_plug(
 'd."LOCATION",',
 'p.name as "Manager"',
 'from "#OWNER#"."SIM_DEPT" d',
-'    join sim_person p on p.person_id = d.SIM_Person_person_id',
+'    left join sim_person p on p.person_id = d.SIM_Person_person_id',
 ''))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_plug_query_row_template=>1
@@ -8264,7 +8286,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'FZOHRA92@UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150217232909'
+,p_last_upd_yyyymmddhh24miss=>'20150218041632'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(589869316595899332)
@@ -8293,7 +8315,7 @@ wwv_flow_api.create_page_plug(
 'p.NAME,',
 'd.name as "Department"',
 'from "#OWNER#"."SIM_PROJECT" p',
-'    join sim_dept d on p.SIM_DEPT_DEPT_ID = d.dept_id',
+'    left join sim_dept d on p.SIM_DEPT_DEPT_ID = d.dept_id',
 '',
 '  ',
 ''))
@@ -8664,7 +8686,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'FZOHRA92@UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150217233517'
+,p_last_upd_yyyymmddhh24miss=>'20150218040452'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(591316637512334919)
@@ -8694,7 +8716,7 @@ wwv_flow_api.create_page_plug(
 'm."TITLE",',
 'm."BONUS",',
 'd.name as "Department"',
-'from "#OWNER#"."SIM_MANAGER" m join sim_dept d on d.dept_id = m.SIM_DEPT_DEPT_ID1',
+'from "#OWNER#"."SIM_MANAGER" m left join sim_dept d on d.dept_id = m.SIM_DEPT_DEPT_ID1',
 '  ',
 '',
 '  ',
@@ -9326,7 +9348,7 @@ wwv_flow_api.create_page(
 ,p_cache_timeout_seconds=>21600
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'FZOHRA92@UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150217233357'
+,p_last_upd_yyyymmddhh24miss=>'20150218041922'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(592906149284437183)
@@ -9356,7 +9378,7 @@ wwv_flow_api.create_page_plug(
 'pe."TITLE",',
 'pe."RATING",',
 'd.name as "Department"',
-'from "#OWNER#"."SIM_PROJECT_EMP" pe join sim_dept d on d.dept_id = pe.SIM_DEPT_DEPT_ID',
+'from "#OWNER#"."SIM_PROJECT_EMP" pe left join sim_dept d on d.dept_id = pe.SIM_DEPT_DEPT_ID',
 '  ',
 ''))
 ,p_plug_source_type=>'NATIVE_IR'
@@ -9913,7 +9935,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'FZOHRA92@UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150217215525'
+,p_last_upd_yyyymmddhh24miss=>'20150218042010'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(594167617132647679)
@@ -9944,8 +9966,8 @@ wwv_flow_api.create_page_plug(
 '"SIM_PERSON_PERSON_ID",',
 'pe.name as "Person Name"',
 '',
-'from "#OWNER#"."SIM_P2P" join sim_project pr on sim_p2p.SIM_PROJECT_PROJECT_ID = pr.project_id',
-'                         join sim_person pe on sim_p2p.SIM_PERSON_PERSON_ID = pe.person_id',
+'from "#OWNER#"."SIM_P2P" left join sim_project pr on sim_p2p.SIM_PROJECT_PROJECT_ID = pr.project_id',
+'                         left join sim_person pe on sim_p2p.SIM_PERSON_PERSON_ID = pe.person_id',
 '',
 '  ',
 ''))

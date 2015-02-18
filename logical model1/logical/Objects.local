@@ -1,0 +1,12 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle.dbtools.crest.model.design.logical.LogicalDesign>
+   <object objectType="Entity" objectID="66B3FFD2-977F-5826-EE64-F4A84168684F" name="SIM_Person" seqName="seg_0"/>
+   <object objectType="Entity" objectID="7DF23C96-4E7D-2CAD-5533-BAD1403A33F4" name="SIM_dept" seqName="seg_0"/>
+   <object objectType="Entity" objectID="F0C88060-C5A4-CD31-99B2-565A00DF0101" name="SIM_p2p" seqName="seg_0"/>
+   <object objectType="Entity" objectID="E8737852-248B-6103-8D79-7536B8F41D63" name="SIM_project" seqName="seg_0"/>
+   <object objectType="Relation" objectID="2DD01CE4-29C7-D6EA-841F-2BCDAE5D7847" name="dept_manager" seqName="seg_0"/>
+   <object objectType="Relation" objectID="30D7A7A9-ADA6-8F0C-B786-8279EB70183A" name="dept_proj_emp" seqName="seg_0"/>
+   <object objectType="Relation" objectID="4693F2DD-37C4-1382-D949-AA93598A807E" name="dept_project" seqName="seg_0"/>
+   <object objectType="Relation" objectID="28FDCF0B-D4C5-21F1-8795-8ADD9232D52D" name="person_p2p" seqName="seg_0"/>
+   <object objectType="Relation" objectID="CD7ED1A7-CC1D-FE12-04B1-02C00117199E" name="project_p2p" seqName="seg_0"/>
+</oracle.dbtools.crest.model.design.logical.LogicalDesign>

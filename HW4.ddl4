@@ -1,0 +1,96 @@
+drop view sim_manager ;
+drop view sim_project_emp ;
+
+create view sim_manager as
+SELECT PERSON_ID, TYPE, NAME, TITLE, BONUS, SIM_DEPT_DEPT_ID1,
+SSNUM, GENDER, BIRTH_DATE, ADDRESS, CITY, STATE, ZIP, HIRE_DATE, SALARY, STATUS
+FROM SIM_PERSON
+WHERE TYPE = 'Manager' ;
+
+create or replace TRIGGER manager_trigger
+     INSTEAD OF insert ON sim_manager
+     FOR EACH ROW
+BEGIN
+     insert into sim_person(
+        PERSON_ID,
+        TYPE,
+        NAME,
+        TITLE,
+        BONUS,
+        SIM_DEPT_DEPT_ID1,
+        SSNUM,
+        GENDER,
+        BIRTH_DATE,
+        ADDRESS,
+        CITY,
+        STATE,
+        ZIP,
+        HIRE_DATE,
+        SALARY,
+        STATUS)
+     VALUES (
+        :new.PERSON_ID,
+        'Manager',
+        :new.NAME,
+        :new.TITLE,
+        :new.BONUS,
+        :new.SIM_DEPT_DEPT_ID1,
+        :new.SSNUM,
+        :new.GENDER,
+        :new.BIRTH_DATE,
+        :new.ADDRESS,
+        :new.CITY,
+        :new.STATE,
+        :new.ZIP,
+        :new.HIRE_DATE,
+        :new.SALARY,
+        :new.STATUS) ;
+END;
+/
+
+create view sim_project_emp as
+SELECT PERSON_ID, TYPE, NAME, TITLE, RATING, SIM_DEPT_DEPT_ID,
+SSNUM, GENDER, BIRTH_DATE, ADDRESS, CITY, STATE, ZIP, HIRE_DATE, SALARY, STATUS
+FROM SIM_PERSON
+WHERE TYPE = 'Project Employee' ;
+
+create or replace TRIGGER projectemp_trigger
+     INSTEAD OF insert ON sim_project_emp
+     FOR EACH ROW
+BEGIN
+     insert into sim_person(
+        PERSON_ID,
+        TYPE,
+        NAME,
+        TITLE,
+        RATING,
+        SIM_DEPT_DEPT_ID,
+        SSNUM,
+        GENDER,
+        BIRTH_DATE,
+        ADDRESS,
+        CITY,
+        STATE,
+        ZIP,
+        HIRE_DATE,
+        SALARY,
+        STATUS)
+     VALUES (
+        :new.PERSON_ID,
+        'Project Employee',
+        :new.NAME,
+        :new.TITLE,
+        :new.RATING,
+        :new.SIM_DEPT_DEPT_ID,
+        :new.SSNUM,
+        :new.GENDER,
+        :new.BIRTH_DATE,
+        :new.ADDRESS,
+        :new.CITY,
+        :new.STATE,
+        :new.ZIP,
+        :new.HIRE_DATE,
+        :new.SALARY,
+        :new.STATUS) ;
+END;
+/

@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="person_p2p" directorySegmentName="seg_0" id="28FDCF0B-D4C5-21F1-8795-8ADD9232D52D">
+<createdBy>fz</createdBy>
+<createdTime>2015-02-17 07:21:26 UTC</createdTime>
+<ownerDesignName>logical model1</ownerDesignName>
+<engineerTo>
+<item key="E7E627D5-0C17-DCBE-C53A-6ECE94F2896C" value="true"/>
+</engineerTo>
+<sourcePk>AB178386-BDF4-1D98-7E3F-2D438D24BDDB</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>true</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>66B3FFD2-977F-5826-EE64-F4A84168684F</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>F0C88060-C5A4-CD31-99B2-565A00DF0101</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

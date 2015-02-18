@@ -27,7 +27,7 @@ prompt APPLICATION 10199 - SIM
 -- Application Export:
 --   Application:     10199
 --   Name:            SIM
---   Date and Time:   04:23 Wednesday February 18, 2015
+--   Date and Time:   04:52 Wednesday February 18, 2015
 --   Exported By:     FZOHRA92@UTEXAS.EDU
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -7834,7 +7834,8 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>50
-,p_report_columns=>'PERSON_ID:TYPE:NAME:SSNUM:GENDER:BIRTH_DATE:ADDRESS:CITY:STATE:ZIP:HIRE_DATE:SALARY:STATUS:TITLE:RATING:BONUS:SIM_DEPT_DEPT_ID1:SIM_DEPT_DEPT_ID:CREATED:CREATED_BY:UPDATED:DEPARTMENT'
+,p_view_mode=>'REPORT'
+,p_report_columns=>'PERSON_ID:TYPE:NAME:SSNUM:GENDER:BIRTH_DATE:ADDRESS:CITY:STATE:ZIP:HIRE_DATE:SALARY:STATUS:TITLE:RATING:DEPARTMENT_MANAGED:DEPARTMENT:BONUS:CREATED:CREATED_BY:UPDATED:'
 ,p_flashback_enabled=>'N'
 );
 end;
